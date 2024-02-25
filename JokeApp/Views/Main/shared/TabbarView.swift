@@ -17,7 +17,7 @@ struct TabBarView: View {
                     .tabItem {
                         Label("Saved", systemImage: "square.and.arrow.down")
                     }
-            }
+            }.background(.blue)
         }
     }
 }
