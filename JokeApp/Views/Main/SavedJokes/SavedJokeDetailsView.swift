@@ -8,7 +8,7 @@ struct SavedJokeDetailsView: View {
     
     var body: some View {
         VStack{
-            Text("Category")
+            Text(selectedJoke.category ?? "Unknown Category")
                 .padding(.bottom, 200)
                 .font(.title2)
                 .fontWeight(.light)
