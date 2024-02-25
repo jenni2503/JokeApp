@@ -52,13 +52,15 @@ struct HomeView: View {
                             
                         }, label: {
                             Text("Save")
-                        }).padding(.horizontal, 20)
+                        })
+                            .disabled(isSaved)
+                            .padding(.horizontal, 20)
                             .padding(12)
                             .foregroundColor(.white)
                             .background(.green)
                             .cornerRadius(10)
                             .fontWeight(.bold)
-                            .disabled(isSaved)
+                            
                         
                     }
                 }
@@ -102,6 +104,7 @@ struct HomeView: View {
     
     //Runs the FetchJoke function and handles all the errors that FetchJoke may throw
     private func RunFetchJoke() async{
+        isSaved = false
         isLoadingJoke = true
         do {
             currentJoke = try await FetchJoke()
