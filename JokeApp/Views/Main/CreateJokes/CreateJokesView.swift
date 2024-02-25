@@ -10,6 +10,7 @@ import SwiftUI
 struct CreateJokesView: View {
     @State private var jokeText = ""
     @State private var selectedCategory = ""
+    @State private var addSavedAlert = false
     
     var body: some View {
         Form {
@@ -30,12 +31,16 @@ struct CreateJokesView: View {
                 
                 Section {
                     Button("Add the joke") {
+                        addSavedAlert = true
                         if !jokeText.isEmpty && !selectedCategory.isEmpty {
 
                         } else {
                             // show error
                         }
                     }
+                    .alert(isPresented: $addSavedAlert) {
+                        Alert(title: Text("Created joke is added!"), dismissButton: .cancel(Text("Done"), action: {} ))
+                            }
                 }
             }
         }
