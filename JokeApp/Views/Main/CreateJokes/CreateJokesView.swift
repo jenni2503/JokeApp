@@ -8,9 +8,37 @@
 import SwiftUI
 
 struct CreateJokesView: View {
+    @State private var jokeText = ""
+    @State private var selectedCategory = ""
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
-    }
+        Form {
+                Section {
+                    TextField("Create the joke", text: $jokeText)
+                }
+                
+                Section {
+                    Picker("Choose Category", selection: $selectedCategory) {
+                        Text("Dark").tag("Dark")
+                        Text("Programming").tag("Programming")
+                        Text("Pun").tag("Pun")
+                        Text("Msic").tag("Misc")
+                        Text("Christmas").tag("Christmas")
+                        Text("Spooky").tag("Spooky")
+                    }
+                }
+                
+                Section {
+                    Button("Add the joke") {
+                        if !jokeText.isEmpty && !selectedCategory.isEmpty {
+
+                        } else {
+                            // show error
+                        }
+                    }
+                }
+            }
+        }
 }
 
 #Preview {

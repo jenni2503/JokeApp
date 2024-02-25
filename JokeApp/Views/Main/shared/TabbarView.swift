@@ -17,6 +17,10 @@ struct TabBarView: View {
                     .tabItem {
                         Label("Saved", systemImage: "square.and.arrow.down")
                     }
+                CreateJokesView()
+                    .tabItem {
+                        Label("Create", systemImage: "plus.diamond.fill")
+                    }
             }.background(.blue)
         }
     }

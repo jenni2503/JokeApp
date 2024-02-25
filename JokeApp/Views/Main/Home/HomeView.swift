@@ -105,6 +105,18 @@ struct HomeView: View {
         }
     }
     
+    private func addJokes(){
+        
+    }
+    
+    private func editJokes(){
+        
+    }
+    
+    private func deleteJokes(){
+        
+    }
+    
     //Runs the FetchJoke function and handles all the errors that FetchJoke may throw
     private func RunFetchJoke() async{
         isSaved = false
