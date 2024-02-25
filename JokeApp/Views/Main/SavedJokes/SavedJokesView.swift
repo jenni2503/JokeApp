@@ -17,6 +17,8 @@ struct SavedJokesView: View {
                             Text(String(joke.setup?.prefix(20) ?? "did not load") + " ...")
                                 .foregroundStyle(.black)
                             Text("\(joke.rating)/5")
+                                .frame(maxWidth: .infinity, alignment: .trailing)
+                                
                         }
                     }
                 }

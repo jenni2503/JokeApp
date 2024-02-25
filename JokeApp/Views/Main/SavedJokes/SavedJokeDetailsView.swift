@@ -8,10 +8,24 @@ struct SavedJokeDetailsView: View {
     
     var body: some View {
         VStack{
-            Text("\(selectedJoke.id)")
+            Text("Category")
+                .padding(.bottom, 200)
+                .font(.title2)
+                .fontWeight(.light)
+            
             Text(selectedJoke.setup ?? "No setup")
+                .fontWeight(.bold)
+                .padding(.top, -100)
+              
+            
             Text(selectedJoke.delivery ?? "No delivery")
+                .padding(.bottom, 120)
+                
+            
             Text("\(selectedJoke.rating) stars")
+                .padding(.bottom, 30)
+                .fontWeight(.semibold)
+            
             HStack {
                 ForEach(1..<6) {i in
                     Image(systemName: "star.fill")
@@ -32,7 +46,9 @@ struct SavedJokeDetailsView: View {
                 }
             }
             
+            
             Text(selectedJoke.comment ?? "No comment")
+                .padding(.top, 50)
             
         }
         

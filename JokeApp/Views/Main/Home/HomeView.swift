@@ -6,11 +6,12 @@ struct HomeView: View {
     @State var currentJoke: Joke?
     @State var isLoadingJoke = false
     @State var isSaved = false
+    @State private var showAlert = false
     
     var body: some View {
         VStack(spacing:0){
             Text("DagensLatter")
-                .font(.system(size: 34, design: .monospaced))
+                .font(.system(size: 34, design: .rounded))
                 .fontWeight(.medium)
                 .padding(.top, 20)
                 .padding(.bottom, 20)
@@ -49,19 +50,21 @@ struct HomeView: View {
                             //saves the mapping of above to core data
                             SaveEntity()
                             isSaved = true
+                            showAlert = true
                             
                         }, label: {
                             Text("Save")
                         })
                             .disabled(isSaved)
+                            .alert(isPresented: $showAlert) {
+                                Alert(title: Text("The joke is saved"), dismissButton: .cancel(Text("Done"), action: {} ))
+                                    }
                             .padding(.horizontal, 20)
                             .padding(12)
                             .foregroundColor(.white)
                             .background(.green)
                             .cornerRadius(10)
                             .fontWeight(.bold)
-                            
-                        
                     }
                 }
                 .task {
