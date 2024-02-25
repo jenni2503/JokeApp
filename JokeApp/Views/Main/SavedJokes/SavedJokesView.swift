@@ -16,7 +16,7 @@ struct SavedJokesView: View {
                         if ( joke.category == selectedCategory ) ||
                             ( selectedCategory == "Any" ) {
                             
-                            NavigationLink(destination: SavedJokeDetailsView(currentRating: joke.rating, selectedJoke: joke))
+                            NavigationLink(destination: SavedJokeDetailsView(currentRating: joke.rating, currentComment: joke.comment ?? "No Comment", selectedJoke: joke))
                             {
                                 Text(String(joke.setup?.prefix(20) ?? "did not load") + " ...")
                                     .foregroundStyle(.black)
@@ -32,9 +32,7 @@ struct SavedJokesView: View {
                 .navigationTitle("Saved Jokes")
                 .toolbar {
                     ToolbarItemGroup(placement: .navigationBarTrailing) {
-                        
-                        Text("Sort by:")
-                        Section {
+                        Menu("Sort by") {
                             Picker("", selection: $selectedCategory) {
                                 ForEach(CategoryOptions.allCases, id: \.rawValue) { category in
                                     Text(category.rawValue)

@@ -4,6 +4,7 @@ struct SavedJokeDetailsView: View {
     
     @Environment(\.managedObjectContext) private var viewContext
     @State var currentRating: Int16
+    @State var currentComment: String
     var selectedJoke: SavedJokeEntity
     
     var body: some View {
@@ -46,10 +47,7 @@ struct SavedJokeDetailsView: View {
                 }
             }
             
-            
-            Text(selectedJoke.comment ?? "No comment")
-                .padding(.top, 50)
-            
+            TextField("Add Comment", text: $currentComment)
         }
         
     }
