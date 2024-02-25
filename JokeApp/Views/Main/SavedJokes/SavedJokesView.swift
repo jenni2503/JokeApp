@@ -12,9 +12,11 @@ struct SavedJokesView: View {
             NavigationView(content: {
                 List {
                     ForEach(jokes) { joke in
-                        NavigationLink(destination: SavedJokeDetailsView(selectedJoke: joke)) {
+                        NavigationLink(destination: SavedJokeDetailsView(currentRating: joke.rating, selectedJoke: joke))
+                        {
                             Text(String(joke.setup?.prefix(20) ?? "did not load") + " ...")
                                 .foregroundStyle(.black)
+                            Text("\(joke.rating)/5")
                         }
                     }
                 }

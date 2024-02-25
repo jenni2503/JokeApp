@@ -5,6 +5,7 @@ struct HomeView: View {
     @Environment(\.managedObjectContext) private var viewContext
     @State var currentJoke: Joke?
     @State var isLoadingJoke = false
+    @State var isSaved = false
     
     var body: some View {
         VStack(spacing:0){
@@ -43,10 +44,13 @@ struct HomeView: View {
                             JokeMapping()
                             //saves the mapping of above to core data
                             SaveEntity()
+                            isSaved = true
                             
                         }, label: {
                             Text("Save")
                         }).padding(.horizontal, 20)
+                            .disabled(isSaved)
+                        
                     }
                     
                 }
@@ -76,6 +80,7 @@ struct HomeView: View {
     
     //Saves the entity/object to core data
     private func SaveEntity(){
+        
         do {
             try viewContext.save()
         } catch {
@@ -134,7 +139,6 @@ struct HomeView: View {
 struct LoadingJokeView: View {
     var body: some View {
         Color(.lightGray)
-            .ignoresSafeArea()
         VStack{
             ProgressView()
                 .progressViewStyle(CircularProgressViewStyle())
