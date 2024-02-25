@@ -12,16 +12,16 @@ struct HomeView: View {
             Text("DagensLatter")
                 .font(.system(size: 34, design: .monospaced))
                 .fontWeight(.medium)
-                .padding(.top, 30)
+                .padding(.top, 20)
                 .padding(.bottom, 20)
             ZStack{
                 
-                Color(.white)
-                    .ignoresSafeArea()
+                Color(red: 9.9, green: 0.7, blue: 0.9)
                 
                 VStack{
                     Text(currentJoke?.setup ?? "Joke setup should be here")
-                        .offset(x: 0, y: -20)
+                        .padding(.bottom, 50)
+                        .fontWeight(.bold)
                     Text(currentJoke?.delivery ?? "Joke delivery should be here")
                         .padding(.bottom, 50)
                        
@@ -36,7 +36,11 @@ struct HomeView: View {
                         }, label: {
                             Text("New Joke")
                         }).disabled(isLoadingJoke)
-                            .padding(.horizontal, 20)
+                            .padding(12)
+                            .foregroundColor(.white)
+                                      .background(.blue)
+                                      .cornerRadius(10)
+                                      .fontWeight(.bold)
                         
                         //Save button
                         Button(action: {
@@ -49,10 +53,14 @@ struct HomeView: View {
                         }, label: {
                             Text("Save")
                         }).padding(.horizontal, 20)
+                            .padding(12)
+                            .foregroundColor(.white)
+                            .background(.green)
+                            .cornerRadius(10)
+                            .fontWeight(.bold)
                             .disabled(isSaved)
                         
                     }
-                    
                 }
                 .task {
                     await RunFetchJoke()
@@ -63,6 +71,7 @@ struct HomeView: View {
                     
                 }
             }
+
         }
         
     }
@@ -138,7 +147,7 @@ struct HomeView: View {
 //RunFetchJoke function sets the isLoadingJoke boolean to true and false
 struct LoadingJokeView: View {
     var body: some View {
-        Color(.lightGray)
+        Color(red: 9.9, green: 0.7, blue: 0.9)
         VStack{
             ProgressView()
                 .progressViewStyle(CircularProgressViewStyle())
