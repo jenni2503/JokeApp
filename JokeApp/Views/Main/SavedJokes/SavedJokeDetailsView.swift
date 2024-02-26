@@ -6,6 +6,8 @@ struct SavedJokeDetailsView: View {
     @State var currentRating: Int16
     @State var currentComment: String
     var selectedJoke: SavedJokeEntity
+    @State private var saveChangesAlert = false
+    
     
     var body: some View {
         VStack(spacing: 10){
@@ -39,9 +41,14 @@ struct SavedJokeDetailsView: View {
             TextField("Add Comment", text: $currentComment)
                 .padding(.leading, 10)
             Spacer()
-            Button(action: SaveChanges, label: {
+            Button(
+                action: SaveChanges, label: {
                 Text("Save Changes")
-            })
+                }
+            ).alert(isPresented: $saveChangesAlert) {
+                Alert(title: Text("Saved Changes"), dismissButton: .cancel(Text("Done"), action: {} ))
+                    }
+            
             Spacer()
         }.navigationTitle(selectedJoke.category ?? "Unknown Category")
         
@@ -53,6 +60,7 @@ struct SavedJokeDetailsView: View {
         selectedJoke.comment = currentComment
         do {
             try viewContext.save()
+            saveChangesAlert = true
         } catch {
             // Replace this implementation with code to handle the error appropriately.
             // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
