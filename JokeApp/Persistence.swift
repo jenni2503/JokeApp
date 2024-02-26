@@ -16,7 +16,7 @@ struct PersistenceController {
             let newItem = SavedJokeEntity(context: viewContext)
             newItem.id = Int32(i)
             newItem.setup = "setup \(i)"
-            newItem.category = (i % 2 == 0) ? "Any" : "Programming"
+            newItem.category = (i % 2 == 0) ? "Misc" : "Programming"
             newItem.delivery = "delivery \(i)"
             newItem.comment = "Random comment \(i)"
             newItem.rating = Int16(i % 5)

@@ -2,6 +2,7 @@
 import SwiftUI
 
 struct SavedJokesView: View {
+    @Environment(\.managedObjectContext) private var viewContext
     //Get all SavedJokeEntity from database/core data and sort them by their rating in descending order
     //reulting data is stored in jokes variable
     @FetchRequest(entity: SavedJokeEntity.entity(), sortDescriptors: [NSSortDescriptor(keyPath: \SavedJokeEntity.rating, ascending: false)])
@@ -28,6 +29,7 @@ struct SavedJokesView: View {
                         }
                         
                     }
+                    .onDelete(perform: UnsaveJoke)
                 }
                 .navigationTitle("Saved Jokes")
                 .toolbar {
@@ -44,6 +46,33 @@ struct SavedJokesView: View {
                 }
             })
         
+    }
+    
+    private func UnsaveJoke(offsets: IndexSet) {
+        withAnimation{
+            guard let index = offsets.first else {
+                return
+            }
+            
+            let selectedJokeEntity = jokes[index]
+            viewContext.delete(selectedJokeEntity)
+            
+            SaveEntity()
+        }
+        
+    }
+    
+    //Saves the entity/object to core data
+    private func SaveEntity(){
+        
+        do {
+            try viewContext.save()
+        } catch {
+            // Replace this implementation with code to handle the error appropriately.
+            // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+            let nsError = error as NSError
+            fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
+        }
     }
     
     enum CategoryOptions: String, CaseIterable {
