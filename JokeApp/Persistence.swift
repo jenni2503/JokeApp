@@ -14,7 +14,6 @@ struct PersistenceController {
         //mock data
         for i in 0..<10 {
             let newItem = SavedJokeEntity(context: viewContext)
-            newItem.id = Int32(i)
             newItem.setup = "setup \(i)"
             newItem.category = (i % 2 == 0) ? "Misc" : "Programming"
             newItem.delivery = "delivery \(i)"

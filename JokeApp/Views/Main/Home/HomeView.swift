@@ -85,7 +85,6 @@ struct HomeView: View {
     //to a core data version of a joke entity/object
     private func JokeMapping() {
         let newItem = SavedJokeEntity(context: viewContext)
-        newItem.id = Int32(currentJoke?.id ?? 0)
         newItem.category = currentJoke?.category ?? "Any"
         newItem.setup = currentJoke?.setup ?? "no setup"
         newItem.delivery = currentJoke?.delivery ?? "no delivery"
