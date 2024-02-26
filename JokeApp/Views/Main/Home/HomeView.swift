@@ -20,10 +20,10 @@ struct HomeView: View {
                 Color(red: 9.9, green: 0.7, blue: 0.9)
                 
                 VStack{
-                    Text(currentJoke?.setup ?? "Joke setup should be here")
+                    Text(currentJoke?.setup ?? "Error loading or getting a new joke")
                         .padding(.bottom, 50)
                         .fontWeight(.bold)
-                    Text(currentJoke?.delivery ?? "Joke delivery should be here")
+                    Text(currentJoke?.delivery ?? "Please try again")
                         .padding(.bottom, 50)
                        
                     
@@ -55,14 +55,14 @@ struct HomeView: View {
                         }, label: {
                             Text("Save")
                         })
-                            .disabled(isSaved)
+                            .disabled(isSaved || (currentJoke == nil))
                             .alert(isPresented: $showAlert) {
                                 Alert(title: Text("The joke is saved"), dismissButton: .cancel(Text("Done"), action: {} ))
                                     }
                             .padding(.horizontal, 20)
                             .padding(12)
                             .foregroundColor(.white)
-                            .background(.green)
+                            .background(isSaved || (currentJoke == nil) ? .gray : .green)
                             .cornerRadius(10)
                             .fontWeight(.bold)
                     }
@@ -126,12 +126,16 @@ struct HomeView: View {
             currentJoke = try await FetchJoke()
         }
         catch JokeError.invalidURL{
+            currentJoke = nil
             print("error in url")
         }catch JokeError.invalidData{
+            currentJoke = nil
             print("error in data")
         }catch JokeError.invalidResponse{
+            currentJoke = nil
             print("error in response")
         } catch {
+            currentJoke = nil
             print("Unknown error")
         }
         DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: { isLoadingJoke = false })
