@@ -8,20 +8,23 @@ struct SavedJokeDetailsView: View {
     var selectedJoke: SavedJokeEntity
     
     var body: some View {
-        VStack{
+        VStack(spacing: 10){
             Text(selectedJoke.category ?? "Unknown Category")
-                .padding(.bottom, 200)
-                .font(.title2)
-                .fontWeight(.light)
+                .fontWeight(.bold)
+                .padding()
+
+            Spacer()
             
             Text(selectedJoke.setup ?? "No setup")
                 .fontWeight(.bold)
-                .padding(.top, -100)
-              
+                .font(.title)
             
             Text(selectedJoke.delivery ?? "No delivery")
-                .padding(.bottom, 120)
-                
+                .fontWeight(.bold)
+                .background(.yellow)
+                .foregroundStyle(.black)
+               
+            Spacer()
             
             Text("\(selectedJoke.rating) stars")
                 .padding(.bottom, 30)
@@ -46,8 +49,10 @@ struct SavedJokeDetailsView: View {
                         }
                 }
             }
+            Spacer()
             
             TextField("Add Comment", text: $currentComment)
+            Spacer()
         }
         
     }
