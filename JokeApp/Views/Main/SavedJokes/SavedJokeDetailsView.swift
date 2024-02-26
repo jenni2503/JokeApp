@@ -20,9 +20,7 @@ struct SavedJokeDetailsView: View {
                 .font(.title)
             
             Text(selectedJoke.delivery ?? "No delivery")
-                .fontWeight(.bold)
-                .background(.yellow)
-                .foregroundStyle(.black)
+                .fontWeight(.regular)
                
             Spacer()
             
@@ -52,6 +50,7 @@ struct SavedJokeDetailsView: View {
             Spacer()
             
             TextField("Add Comment", text: $currentComment)
+                .padding(.leading, 10)
             Spacer()
         }
         
