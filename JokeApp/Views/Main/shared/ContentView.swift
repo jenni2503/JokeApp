@@ -10,8 +10,9 @@ struct ContentView: View {
         TabBarView()
     }
 }
-    #Preview {
-        ContentView().environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
-    }
+
+#Preview {
+    ContentView().environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
+}
 
 

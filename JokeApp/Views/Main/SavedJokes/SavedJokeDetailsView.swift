@@ -18,7 +18,7 @@ struct SavedJokeDetailsView: View {
             
             Text(selectedJoke.delivery ?? "No delivery")
                 .fontWeight(.regular)
-               
+            
             Spacer()
             
             Text("\(currentRating) stars")
@@ -43,11 +43,11 @@ struct SavedJokeDetailsView: View {
             Spacer()
             Button(
                 action: SaveChanges, label: {
-                Text("Save Changes")
+                    Text("Save Changes")
                 }
             ).alert(isPresented: $saveChangesAlert) {
                 Alert(title: Text("Saved Changes"), dismissButton: .cancel(Text("Done"), action: {} ))
-                    }
+            }
             
             Spacer()
         }.navigationTitle(selectedJoke.category ?? "Unknown Category")

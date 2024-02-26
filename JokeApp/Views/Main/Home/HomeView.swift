@@ -25,7 +25,7 @@ struct HomeView: View {
                         .fontWeight(.bold)
                     Text(currentJoke?.delivery ?? "Please try again")
                         .padding(.bottom, 50)
-                       
+                    
                     
                     HStack {
                         //New joke button
@@ -39,9 +39,9 @@ struct HomeView: View {
                         }).disabled(isLoadingJoke)
                             .padding(12)
                             .foregroundColor(.white)
-                                      .background(.blue)
-                                      .cornerRadius(10)
-                                      .fontWeight(.bold)
+                            .background(.blue)
+                            .cornerRadius(10)
+                            .fontWeight(.bold)
                         
                         //Save button
                         Button(action: {
@@ -55,16 +55,16 @@ struct HomeView: View {
                         }, label: {
                             Text("Save")
                         })
-                            .disabled(isSaved && (currentJoke == nil))
-                            .alert(isPresented: $showAlert) {
-                                Alert(title: Text("The joke is saved"), dismissButton: .cancel(Text("Done"), action: {} ))
-                                    }
-                            .padding(.horizontal, 20)
-                            .padding(12)
-                            .foregroundColor(.white)
-                            .background(isSaved || (currentJoke == nil) ? .gray : .green)
-                            .cornerRadius(10)
-                            .fontWeight(.bold)
+                        .disabled(isSaved && (currentJoke == nil))
+                        .alert(isPresented: $showAlert) {
+                            Alert(title: Text("The joke is saved"), dismissButton: .cancel(Text("Done"), action: {} ))
+                        }
+                        .padding(.horizontal, 20)
+                        .padding(12)
+                        .foregroundColor(.white)
+                        .background(isSaved || (currentJoke == nil) ? .gray : .green)
+                        .cornerRadius(10)
+                        .fontWeight(.bold)
                     }
                 }
                 .task {
@@ -76,7 +76,7 @@ struct HomeView: View {
                     
                 }
             }
-
+            
         }
         
     }
@@ -103,18 +103,6 @@ struct HomeView: View {
             let nsError = error as NSError
             fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
         }
-    }
-    
-    private func addJokes(){
-        
-    }
-    
-    private func editJokes(){
-        
-    }
-    
-    private func deleteJokes(){
-        
     }
     
     //Runs the FetchJoke function and handles all the errors that FetchJoke may throw

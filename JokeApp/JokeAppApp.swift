@@ -3,7 +3,7 @@ import SwiftUI
 @main
 struct JokeAppApp: App {
     let persistenceController = PersistenceController.shared
-
+    
     var body: some Scene {
         WindowGroup {
             ContentView()

@@ -11,40 +11,40 @@ struct SavedJokesView: View {
     @State private var selectedCategory: String = "Any"
     
     var body: some View {
-            NavigationView(content: {
-                List {
-                    ForEach(jokes) { joke in
-                        if ( joke.category == selectedCategory ) ||
-                            ( selectedCategory == "Any" ) {
-                            
-                            NavigationLink(destination: SavedJokeDetailsView(currentRating: joke.rating, currentComment: joke.comment ?? "No Comment", selectedJoke: joke))
-                            {
-                                Text(String(joke.setup?.prefix(20) ?? "did not load") + " ...")
-                                    .foregroundStyle(.black)
-                                
-                                Text("\(joke.rating)/5")
-                                    .frame(maxWidth: .infinity, alignment: .trailing)
-                                    
-                            }
-                        }
+        NavigationView(content: {
+            List {
+                ForEach(jokes) { joke in
+                    if ( joke.category == selectedCategory ) ||
+                        ( selectedCategory == "Any" ) {
                         
+                        NavigationLink(destination: SavedJokeDetailsView(currentRating: joke.rating, currentComment: joke.comment ?? "No Comment", selectedJoke: joke))
+                        {
+                            Text(String(joke.setup?.prefix(20) ?? "did not load") + " ...")
+                                .foregroundStyle(.black)
+                            
+                            Text("\(joke.rating)/5")
+                                .frame(maxWidth: .infinity, alignment: .trailing)
+                            
+                        }
                     }
-                    .onDelete(perform: UnsaveJoke)
+                    
                 }
-                .navigationTitle("Saved Jokes")
-                .toolbar {
-                    ToolbarItemGroup(placement: .navigationBarTrailing) {
-                        Menu("Sort by") {
-                            Picker("", selection: $selectedCategory) {
-                                ForEach(CategoryOptions.allCases, id: \.rawValue) { category in
-                                    Text(category.rawValue)
-                                        .tag(category.rawValue)
-                                }
+                .onDelete(perform: UnsaveJoke)
+            }
+            .navigationTitle("Saved Jokes")
+            .toolbar {
+                ToolbarItemGroup(placement: .navigationBarTrailing) {
+                    Menu("Sort by") {
+                        Picker("", selection: $selectedCategory) {
+                            ForEach(CategoryOptions.allCases, id: \.rawValue) { category in
+                                Text(category.rawValue)
+                                    .tag(category.rawValue)
                             }
                         }
                     }
                 }
-            })
+            }
+        })
         
     }
     
@@ -68,8 +68,6 @@ struct SavedJokesView: View {
         do {
             try viewContext.save()
         } catch {
-            // Replace this implementation with code to handle the error appropriately.
-            // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
             let nsError = error as NSError
             fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
         }
