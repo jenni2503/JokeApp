@@ -55,7 +55,7 @@ struct HomeView: View {
                         }, label: {
                             Text("Save")
                         })
-                            .disabled(isSaved || (currentJoke == nil))
+                            .disabled(isSaved && (currentJoke == nil))
                             .alert(isPresented: $showAlert) {
                                 Alert(title: Text("The joke is saved"), dismissButton: .cancel(Text("Done"), action: {} ))
                                     }

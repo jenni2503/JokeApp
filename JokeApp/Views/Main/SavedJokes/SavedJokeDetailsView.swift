@@ -9,22 +9,17 @@ struct SavedJokeDetailsView: View {
     
     var body: some View {
         VStack(spacing: 10){
-            Text(selectedJoke.category ?? "Unknown Category")
-                .fontWeight(.bold)
-                .padding()
-
             Spacer()
-            
             Text(selectedJoke.setup ?? "No setup")
                 .fontWeight(.bold)
-                .font(.title)
+                .font(.title2)
             
             Text(selectedJoke.delivery ?? "No delivery")
                 .fontWeight(.regular)
                
             Spacer()
             
-            Text("\(selectedJoke.rating) stars")
+            Text("\(currentRating) stars")
                 .padding(.bottom, 30)
                 .fontWeight(.semibold)
             
@@ -32,18 +27,10 @@ struct SavedJokeDetailsView: View {
                 ForEach(1..<6) {i in
                     Image(systemName: "star.fill")
                         .font(.title3)
-                        .foregroundColor(selectedJoke.rating >= i ? Color.yellow : Color.gray)
+                        .foregroundColor(currentRating >= i ? Color.yellow : Color.gray)
                         .onTapGesture {
-                            selectedJoke.rating = Int16(i)
+                            currentRating = Int16(i)
                             
-                            do {
-                                try viewContext.save()
-                            } catch {
-                                // Replace this implementation with code to handle the error appropriately.
-                                // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-                                let nsError = error as NSError
-                                fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
-                            }
                         }
                 }
             }
@@ -52,8 +39,26 @@ struct SavedJokeDetailsView: View {
             TextField("Add Comment", text: $currentComment)
                 .padding(.leading, 10)
             Spacer()
-        }
+            Button(action: SaveChanges, label: {
+                Text("Save Changes")
+            })
+            Spacer()
+        }.navigationTitle(selectedJoke.category ?? "Unknown Category")
         
+    }
+    
+    private func SaveChanges() {
+        print("runs")
+        selectedJoke.rating = currentRating
+        selectedJoke.comment = currentComment
+        do {
+            try viewContext.save()
+        } catch {
+            // Replace this implementation with code to handle the error appropriately.
+            // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+            let nsError = error as NSError
+            fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
+        }
     }
 }
 
