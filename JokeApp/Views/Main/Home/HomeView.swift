@@ -88,7 +88,7 @@ struct HomeView: View {
         newItem.category = currentJoke?.category ?? "Any"
         newItem.setup = currentJoke?.setup ?? "no setup"
         newItem.delivery = currentJoke?.delivery ?? "no delivery"
-        newItem.comment = "No Comment"
+        newItem.comment = ""
         newItem.rating = 0;
     }
     
